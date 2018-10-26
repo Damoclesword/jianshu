@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 // import styled components
 import {
   HeaderWrapper, Logo, Container, Nav, NavItem, NavSearch, Addition, Button,
 } from './style'
 // import actions
-import { inputFocusedChange } from '../../store/reducer'
+import { actionCreators } from './store'
 
 const Header = (props) => {
   const { handleSearchFocusChange } = props
@@ -53,12 +53,12 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => ({
-  focused: state.focused,
+  focused: state.header.focused,
 })
 
 const mapDispatchToProps = dispatch => ({
   handleSearchFocusChange: (focused) => {
-    dispatch(inputFocusedChange(focused))
+    dispatch(actionCreators.inputFocusedChange(focused))
   },
 })
 
