@@ -45,7 +45,7 @@ export const Container = styled.div`
 export const Nav = styled.ul`
   margin: 0;
 
-  ::after {
+  &:after {
     display: block;
     clear: both;
     height: 0;
@@ -59,6 +59,7 @@ const ItemWrapper = styled.li`
   font-size: 17px;
   margin: 0 8px;
   line-height: 56px;
+  position: relative;
 
   & > .item {
     color: #333;
@@ -71,7 +72,6 @@ const ItemWrapper = styled.li`
   }
 
   &.search {
-    position: relative;
     margin-left: 15px;
   }
 
@@ -164,15 +164,172 @@ const SearchBtn = styled.a.attrs({
     color: #fff !important;
   }
 `
+// HotSearch
 
+const HotSearchWrapper = styled.div`
+  position: absolute;
+  width: 250px;
+  left: 0;
+  margin-top: 1px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+
+  &:before {
+    content: '';
+    left: 27px;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    top: -5px;
+    z-index: -1;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-bottom-color: #fff;
+    left: 20px;
+    bottom: 98%;
+  }
+`
+
+const HotSearchTrending = styled.div`
+  padding: 20px 20px 10px;
+  margin-bottom: 1px solid #f0f0f0;
+`
+
+// Header
+const HotSearchHeader = styled.div`
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+
+  &:after {
+    display: block;
+    clear: both;
+    height: 0;
+    content: '';
+    visibility: hidden;
+    overflow: hidden;
+  }
+`
+
+const HotSearchTitle = styled.div`
+  float: left;
+  color: #969696;
+`
+
+const HotSearchSwitch = styled.div.attrs({
+  href: '#',
+})`
+  float: right;
+  color: #969696;
+  cursor: pointer;
+
+  & > i {
+    margin-right: 2px;
+    font-size: 13px;
+  }
+
+  &:hover {
+    color: #000;
+  }
+`
+
+// Tags
+const TagsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
+`
+
+const Tag = styled.a.attrs({
+  href: props => props.href || '',
+})`
+  padding: 3px 6px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #787878;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #333;
+    border-color: #b4b4b4;
+  }
+`
+
+const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPage) => {
+  if (show.focused || show.mouseEnter) {
+    return (
+      <>
+        {/* HotSearch */}
+        <HotSearchWrapper
+          onMouseEnter={handleMouseBehaviors.handleMouseEnter}
+          onMouseLeave={handleMouseBehaviors.handleMouseLeave}
+        >
+          <HotSearchTrending>
+            <HotSearchHeader>
+              <HotSearchTitle>热门搜索</HotSearchTitle>
+              <HotSearchSwitch onClick={handleChangeListPage}>
+                <i className="jianshu">&#xe603;</i>
+                <span>换一批</span>
+              </HotSearchSwitch>
+            </HotSearchHeader>
+
+            <TagsWrapper>
+              {list.map(item => (
+                <Tag key={item}>{item}</Tag>
+              ))}
+            </TagsWrapper>
+          </HotSearchTrending>
+        </HotSearchWrapper>
+      </>
+    )
+  }
+  return <></>
+}
+
+// 完整的Search组件
 export const NavSearch = (props) => {
-  const { className, onSearchInputFocus, onSearchInputBlur } = props
+  const {
+    className,
+    onSearchInputFocus,
+    onSearchInputBlur,
+    showHostSearchArea,
+    hotSearchList,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleChangeListPage,
+  } = props
   return (
     <ItemWrapper className={className}>
       <SearchInput onFocus={onSearchInputFocus} onBlur={onSearchInputBlur} />
       <SearchBtn>
         <i className="jianshu">&#xe6a2;</i>
       </SearchBtn>
+      {showHotSearchArea(
+        showHostSearchArea,
+        hotSearchList,
+        { handleMouseEnter, handleMouseLeave },
+        handleChangeListPage,
+      )}
     </ItemWrapper>
   )
 }
