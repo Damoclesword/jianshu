@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import logoImage from '../../static/logo.png'
 
@@ -236,9 +236,14 @@ const HotSearchSwitch = styled.div.attrs({
   color: #969696;
   cursor: pointer;
 
-  & > i {
+  & i.icon-switch {
+    display: inline-block;
+    line-height: 1
     margin-right: 2px;
     font-size: 13px;
+    transition: .5s ease;
+    transform: rotate(0deg);
+    transform-origin: center center;
   }
 
   &:hover {
@@ -275,8 +280,26 @@ const Tag = styled.a.attrs({
   }
 `
 
-const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPage) => {
-  if (show.focused || show.mouseEnter) {
+// 完整热搜组件
+class HotSearch extends Component {
+  constructor(props) {
+    super(props)
+    this.handleHotSearchSwitchClick = this.handleHotSearchSwitchClick.bind(this)
+  }
+
+  handleHotSearchSwitchClick() {
+    const { handleChangeListPage } = this.props
+    handleChangeListPage()
+    // 改变icon角度
+    let originAngle = this.switchIcon.style.transform.replace(/[^0-9]/gi, '')
+    if (originAngle) originAngle = parseInt(originAngle, 10)
+    else originAngle = 0
+    this.switchIcon.style.transform = `rotate(${originAngle + 360}deg)`
+    console.log(this.switchIcon.style.transform)
+  }
+
+  render() {
+    const { list, handleMouseBehaviors } = this.props
     return (
       <>
         {/* HotSearch */}
@@ -287,8 +310,15 @@ const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPag
           <HotSearchTrending>
             <HotSearchHeader>
               <HotSearchTitle>热门搜索</HotSearchTitle>
-              <HotSearchSwitch onClick={handleChangeListPage}>
-                <i className="jianshu">&#xe652;</i>
+              <HotSearchSwitch onClick={this.handleHotSearchSwitchClick}>
+                <i
+                  ref={(icon) => {
+                    this.switchIcon = icon
+                  }}
+                  className="jianshu icon-switch"
+                >
+                  &#xe652;
+                </i>
                 <span>换一批</span>
               </HotSearchSwitch>
             </HotSearchHeader>
@@ -301,6 +331,19 @@ const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPag
           </HotSearchTrending>
         </HotSearchWrapper>
       </>
+    )
+  }
+}
+
+// 是否渲染热搜组件
+const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPage) => {
+  if (show.focused || show.mouseEnter) {
+    return (
+      <HotSearch
+        list={list}
+        handleMouseBehaviors={handleMouseBehaviors}
+        handleChangeListPage={handleChangeListPage}
+      />
     )
   }
   return <></>
@@ -324,6 +367,7 @@ export const NavSearch = (props) => {
       <SearchBtn>
         <i className="jianshu">&#xe6a2;</i>
       </SearchBtn>
+
       {showHotSearchArea(
         showHostSearchArea,
         hotSearchList,
