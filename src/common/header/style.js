@@ -288,7 +288,7 @@ const showHotSearchArea = (show, list, handleMouseBehaviors, handleChangeListPag
             <HotSearchHeader>
               <HotSearchTitle>热门搜索</HotSearchTitle>
               <HotSearchSwitch onClick={handleChangeListPage}>
-                <i className="jianshu">&#xe603;</i>
+                <i className="jianshu">&#xe652;</i>
                 <span>换一批</span>
               </HotSearchSwitch>
             </HotSearchHeader>
