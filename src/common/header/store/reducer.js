@@ -15,17 +15,14 @@ export default (state, action) => {
     case constants.INPUT_FOCUSED_CHANGE:
       return state.set('focused', action.focused)
     case constants.CHANGE_LIST:
-      return state.set('list', action.list).set('totalListPage', action.totalListPage)
+      return state.merge({
+        list: action.list,
+        totalListPage: action.totalListPage,
+      })
     case constants.MOUSE_BEHAVIORS_HOT_LIST:
       return state.set('mouseEnter', action.isEnter)
-    case constants.CHANGE_LIST_PAGE: {
-      const page = state.get('listPage')
-      const totalPage = state.get('totalListPage')
-      if (page < totalPage - 1) {
-        return state.set('listPage', page + 1)
-      }
-      return state.set('listPage', 0)
-    }
+    case constants.CHANGE_LIST_PAGE:
+      return state.set('listPage', action.page)
     default:
       return state
   }

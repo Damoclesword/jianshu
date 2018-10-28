@@ -19,6 +19,7 @@ class Header extends Component {
       mouseEnter,
       list,
       page,
+      totalPage,
     } = this.props
     return (
       <HeaderWrapper>
@@ -43,7 +44,7 @@ class Header extends Component {
               onSearchInputBlur={handleSearchBlur}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
-              handleChangeListPage={handleChangeListPage}
+              handleChangeListPage={() => handleChangeListPage(page, totalPage)}
               showHostSearchArea={{ focused, mouseEnter }}
               hotSearchList={list.slice(page * 10, page * 10 + 10)}
             />
@@ -98,8 +99,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionCreators.mouseBehaviorsHotList(false))
   },
 
-  handleChangeListPage: () => {
-    dispatch(actionCreators.changeListPage())
+  handleChangeListPage: (page, totalPage) => {
+    if (page < totalPage - 1) dispatch(actionCreators.changeListPage(page + 1))
+    else dispatch(actionCreators.changeListPage(0))
   },
 })
 

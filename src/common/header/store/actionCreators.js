@@ -28,6 +28,7 @@ export const mouseBehaviorsHotList = isEnter => ({
   isEnter,
 })
 
-export const changeListPage = () => ({
+export const changeListPage = page => ({
   type: constants.CHANGE_LIST_PAGE,
+  page,
 })
