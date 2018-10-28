@@ -40,7 +40,7 @@ class Header extends Component {
             />
             <NavSearch
               className="left search"
-              onSearchInputFocus={handleSearchFocus}
+              onSearchInputFocus={() => handleSearchFocus(list)}
               onSearchInputBlur={handleSearchBlur}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
@@ -82,8 +82,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleSearchFocus: () => {
-    dispatch(actionCreators.getHotSearchList())
+  handleSearchFocus: (list) => {
+    if (list.size === 0) dispatch(actionCreators.getHotSearchList())
     dispatch(actionCreators.inputFocusedChange(true))
   },
 
