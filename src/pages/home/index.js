@@ -13,7 +13,9 @@ class Home extends Component {
             <Topic />
             <List />
           </HomeMain>
-          <HomeAside>HomeAside</HomeAside>
+          <HomeAside>
+            <Recommend />
+          </HomeAside>
         </HomeWrapper>
       </div>
     )

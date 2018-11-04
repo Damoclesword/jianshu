@@ -3,11 +3,11 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
   @font-face {
     font-family: 'jianshu';  /* project id 890964 */
-    src: url('//at.alicdn.com/t/font_890964_lbhnmxwwrch.eot');
-    src: url('//at.alicdn.com/t/font_890964_lbhnmxwwrch.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_890964_lbhnmxwwrch.woff') format('woff'),
-    url('//at.alicdn.com/t/font_890964_lbhnmxwwrch.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_890964_lbhnmxwwrch.svg#jianshu') format('svg');
+    src: url('//at.alicdn.com/t/font_890964_n3hc4e50wns.eot');
+    src: url('//at.alicdn.com/t/font_890964_n3hc4e50wns.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_890964_n3hc4e50wns.woff') format('woff'),
+    url('//at.alicdn.com/t/font_890964_n3hc4e50wns.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_890964_n3hc4e50wns.svg#jianshu') format('svg');
   }
 
   .jianshu {

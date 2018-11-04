@@ -12,6 +12,7 @@ export const HeaderWrapper = styled.div`
   z-index: 1030;
   border-bottom: 1px solid #f0f0f0;
   margin: 0 auto;
+  background-color: #fff;
 `
 
 // Logo Component
@@ -153,7 +154,6 @@ const SearchBtn = styled.a.attrs({
   padding: 0 !important;
   color: #969696 !important;
   text-align: center;
-  cursor: pointer;
 
   & > i {
     font-size: 20px;
@@ -271,7 +271,6 @@ const Tag = styled.a.attrs({
   margin-right: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
-  cursor: pointer;
 
   &:hover,
   &:focus {
