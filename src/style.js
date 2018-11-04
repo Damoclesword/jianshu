@@ -77,4 +77,10 @@ export default createGlobalStyle`
     {
         outline:0;
     }
+    body {
+        padding-top: 56px !important;
+    }
+    *, :after, :before {
+        box-sizing: border-box;
+    }
 `

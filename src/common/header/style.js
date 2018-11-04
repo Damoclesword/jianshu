@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import logoImage from '../../static/logo.png'
 
 export const HeaderWrapper = styled.div`
+  box-sizing: border-box;
   position: fixed;
+  height: 56px;
   top: 0;
   right: 0;
   left: 0;
@@ -63,8 +65,7 @@ const ItemWrapper = styled.li`
 
   & > .item {
     color: #333;
-    padding: 20px 15px;
-    height: 56px;
+    padding: 19px 15px;
   }
 
   &:not(.active) > .item:hover {
@@ -170,7 +171,6 @@ const HotSearchWrapper = styled.div`
   position: absolute;
   width: 250px;
   left: 0;
-  margin-top: 1px;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
