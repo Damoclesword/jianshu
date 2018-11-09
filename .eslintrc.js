@@ -13,7 +13,7 @@ module.exports = {
     "global-require": 0,
 
     //是否有分号
-    semi: [2, "never"],
+    semi: ["error", "never"],
 
     /**
      * 要求是否为纯组件
@@ -25,6 +25,11 @@ module.exports = {
      * props是否有校验检查
      * doc: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
      */
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    /**
+     * 是否禁止悬空下划线的使用
+     * https://cn.eslint.org/docs/rules/no-underscore-dangle
+     */
+    "no-underscore-dangle": 0
   }
 };

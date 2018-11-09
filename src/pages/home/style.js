@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Switch from '../../common/switch'
 
 export const HomeWrapper = styled.div.attrs({
   className: 'home-wrapper',
@@ -386,3 +387,154 @@ export const Recommend = () => (
     </RecommendItem>
   </RecommendWrapper>
 )
+
+// Writer Component styles
+export const WriterWrapper = styled.div`
+  padding-top: 0px;
+  font-size: 13px;
+  text-align: center;
+`
+
+const HeaderWrapper = styled.div.attrs({ className: 'title' })`
+  text-align: left;
+  & > span {
+    font-size: 14px;
+    color: #969696;
+  }
+
+  & > .page-change {
+    float: right;
+    display: inline-block;
+    font-size: 14px;
+    color: #969696;
+    cursor: pointer;
+
+    & > i {
+      display: inline-block;
+      font-size: 14px;
+      margin-right: 3px;
+      transition: 0.5s ease;
+      transform: rotate(0deg);
+      transform-origin: center center;
+    }
+
+    &:hover {
+      color: #787878;
+    }
+  }
+`
+
+const Icon = (props) => {
+  const { style } = props
+  return (
+    <i className="jianshu icon-switch" style={style || {}}>
+      &#xe652;
+    </i>
+  )
+}
+
+export const HeaderTitle = (props) => {
+  const { handleSwitchClick } = props
+  return (
+    <HeaderWrapper>
+      <span>推荐作者</span>
+      <Switch
+        className="page-change"
+        handleSwitchClick={handleSwitchClick}
+        Icon={Icon}
+        text="换一批"
+      />
+    </HeaderWrapper>
+  )
+}
+
+export const WriterListWrapper = styled.div`
+  text-align: left;
+  margin: 0 0 20px;
+`
+
+const WriterListItemWrapper = styled.div`
+  margin-top: 15px;
+  line-height: 20px;
+
+  & > .avatar {
+    display: block;
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+    }
+  }
+
+  & > .name {
+    padding-top: 5px;
+    margin-right: 60px;
+    font-size: 14px;
+    display: block;
+  }
+
+  & > p {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #969696;
+  }
+
+  & > .follow {
+    float: right;
+    margin-top: 5px;
+    padding: 0;
+    font-size: 13px;
+    color: #42c02e;
+
+    & > i {
+      font-size: 12px;
+      padding-right: 1px;
+    }
+  }
+`
+
+export const WriterListItem = (props) => {
+  const {
+    href, avatarUrl, name, desc,
+  } = props
+  return (
+    <WriterListItemWrapper>
+      <a href={href} className="avatar">
+        <img alt="avatar" src={avatarUrl} />
+      </a>
+      <a className="follow" href="/">
+        <i className="jianshu">&#xe61f;</i>
+        关注
+      </a>
+      <a className="name" href={href}>
+        {name}
+      </a>
+      <p>{desc}</p>
+    </WriterListItemWrapper>
+  )
+}
+
+export const FindMoreButton = styled.a.attrs({
+  href: props => props.href || '/',
+})`
+  position: absolute;
+  padding: 7px 7px 7px 12px;
+  left: 0;
+  width: 100%;
+  font-size: 13px;
+  color: #787878;
+  background-color: #f7f7f7;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+
+  & > i {
+    vertical-align: -2px;
+  }
+`
